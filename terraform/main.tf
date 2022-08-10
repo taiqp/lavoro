@@ -6,7 +6,7 @@ resource "azurerm_linux_virtual_machine" "lavoro" {
   name                = each.value
   resource_group_name = azurerm_resource_group.lavoro.name
   location            = azurerm_resource_group.lavoro.location
-  size                = "Standard_B1" **********************************
+  size                = var.Size(each.value)
 
   admin_username      = "lavoro"
   network_interface_ids = [azurerm_network_interface.lavoro[each.key].id]

@@ -36,4 +36,14 @@ variable Role {
   default = ["automation","jenkins","docker","kubemaster","kubeworker01","kubeworker02"]
 }
 
-
+variable Size {
+    type = map
+    default = {
+        "automation" = "Standard_B1ls"
+        "jenkins" = "Standard_B2s"
+        "docker" = "Standard_B2s"
+        "kubemaster" = "Standard_B2s"
+        "kubeworker01" = "Standard_B1ls"
+        "kubeworker02" = "Standard_B1ls"
+    }
+}
