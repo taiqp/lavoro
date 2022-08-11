@@ -2,9 +2,9 @@
 
 resource "azurerm_linux_virtual_machine" "lavoro" {
 
-  for_each            = toset(var.Role)
-  name                = each.value
-  size                = var.Size[each.value]
+  for_each              = toset(var.Role)
+  name                  = each.value
+  size                  = var.Size[each.value]
   network_interface_ids = [azurerm_network_interface.lavoro[each.key].id]
 
   resource_group_name = azurerm_resource_group.lavoro.name
@@ -13,7 +13,7 @@ resource "azurerm_linux_virtual_machine" "lavoro" {
 
   admin_ssh_key {
     username   = "lavoro"
-    public_key = file("/home/tqphat/lavoro/terraform/id_rsa.pub")
+    public_key = file(var.PublicKey)
   }
 
   os_disk {
@@ -28,4 +28,21 @@ resource "azurerm_linux_virtual_machine" "lavoro" {
     version   = "latest"
   }
 
+  provisioner "file" {
+    source      = var.ProvisioningScript[each.value]
+    destination = "/tmp/install.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/install.sh",
+      "/tmp/install.sh",
+    ]
+  }
+  connection {
+    type        = "ssh"
+    user        = "lavoro"
+    private_key = file(var.PrivateKey)
+    host        = self.public_ip_address
+  }
 }
