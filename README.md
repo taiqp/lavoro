@@ -1,15 +1,25 @@
-# lavoro
-Per il devops lavoro
+# Prerequisites
+#
+- JDK 1.8 or later
+- Maven 3 or later
+- MySQL 5.6 or later
 
-My tools, scripts, sources and experiences for DevOps job.
+# Technologies 
+- Spring MVC
+- Spring Security
+- Spring Data JPA
+- Maven
+- JSP
+- MySQL
+# Database
+Here,we used Mysql DB 
+MSQL DB Installation Steps for Linux ubuntu 14.04:
+- $ sudo apt-get update
+- $ sudo apt-get install mysql-server
 
-1. Git & other version control tools.
-2. Maven, npm & other build tools.
-3. Terraform & other launching Cloud services tools.
-4. Ansible & other configuration management tools.
-5. Azure & other Cloud services.
-6. Jenkins & other CI/CD tools.
-7. Docker & other Containerization tools.
-8. Kubernetes & other Container Orchestration tools.
-9. Logs & Monitoring tools.
-10. Data, Big Data, Relational DB & Unrelational DB.
+Then look for the file :
+- /src/main/resources/accountsdb
+- accountsdb.sql file is a mysql dump file.we have to import this dump to mysql db server
+- > mysql -u <user_name> -p accounts < accountsdb.sql
+
+
