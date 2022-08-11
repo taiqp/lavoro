@@ -4,7 +4,7 @@ resource "azurerm_linux_virtual_machine" "lavoro" {
 
   for_each            = toset(var.Role)
   name                = each.value
-  size                = var.Size(each.value)
+  size                = var.Size[each.value]
   network_interface_ids = [azurerm_network_interface.lavoro[each.key].id]
 
   resource_group_name = azurerm_resource_group.lavoro.name

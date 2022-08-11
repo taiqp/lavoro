@@ -1,0 +1,11 @@
+automation ansible_host=20.231.195.41
+
+[devops]
+automation
+
+[lavoro:children]
+devops
+
+[lavoro:vars]
+ansible_user=lavoro
+ansible_ssh_private_key_file=~/newserver/automation

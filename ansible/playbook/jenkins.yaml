@@ -1,0 +1,7 @@
+---
+- name: Install Jenkins
+  hosts: automation
+  tasks:
+	- name: Apt Update
+	  apt:
+		
