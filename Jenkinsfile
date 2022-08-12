@@ -1,5 +1,10 @@
 pipeline {
 	agent any
+
+	tools {
+		maven 'mavenpro'	
+	}
+
 	stages {
 		stage('Fetch') {
 			steps {
