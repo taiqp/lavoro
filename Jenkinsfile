@@ -1,6 +1,8 @@
 pipeline {
         agent any
-
+        environment{
+            registryCredential = 'dockerhub'
+        }
         tools {
                 maven 'mavenpro'
                 dockerTool 'dockerpro'
@@ -52,17 +54,24 @@ pipeline {
 
                 stage('Docker Build') {
                         steps {
+                            
+                            script{
                               dockerImage = docker.build("taiqp/vprofileapp:v$BUILD_NUMBER", "./")
                                // sh 'docker build -t taiqp/vprofileapp:v100 .'
+                            }
                         }
-
                 }
-		
-		stage('Docker Push') {
-			steps {
-				
-			}
-		}
+
+                stage('Docker Push') {
+                        steps {
+                            script {
+                                docker.withRegistry("", registryCredential){
+                                    dockerImage.push("v$BUILD_NUMBER")
+                                    dockerImage.push('latest')
+                                }
+                }
+                        }
+                }
 
         }
 }
