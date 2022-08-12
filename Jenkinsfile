@@ -28,8 +28,10 @@ pipeline {
 
 		stage('Docker Build') {
 			steps {
-				dockerImage = docker.build("taiqp/vprofileapp:v$BUILD_NUMBER", "./")
+			//	dockerImage = docker.build("taiqp/vprofileapp:v$BUILD_NUMBER", "./")
+				sh 'docker build -t taiqp/vprofileapp:v100 .'
 			}
+
 		}
 
 	}
