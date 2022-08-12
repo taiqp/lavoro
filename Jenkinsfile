@@ -3,7 +3,6 @@ pipeline {
 
 	tools {
 		maven 'mavenpro'	
-		jdk 'JDKpro'	
 	}
 
 	stages {
@@ -14,6 +13,13 @@ pipeline {
 		}
 
 		stage('Build') {
+			agent {
+				docker{
+					image 'maven:3.8.6-openjdk-8'
+					args '-v $(pwd):/usr/src/mymaven'
+					reuseNode true
+				}
+			}
 			steps {
 				sh 'mvn clean install -DskipTests'
 
