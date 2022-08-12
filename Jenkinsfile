@@ -3,6 +3,7 @@ pipeline {
 
 	tools {
 		maven 'mavenpro'	
+		jdk 'JDKpro'	
 	}
 
 	stages {
