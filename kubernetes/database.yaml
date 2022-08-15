@@ -1,0 +1,60 @@
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+spec:
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: db
+        image: liguria.azurecr.io/taiqp/vprofiledb:v1
+        ports:
+        - containerPort: 3306
+        args:
+        - "--ignore-db-dir=lost+found"
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: roma
+              key: root
+        - name: MYSQL_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: roma
+              key: database
+        - name: MYSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              name: roma
+              key: db_user
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: roma
+              key: db_pass
+        volumeMounts:
+        - name: db-data
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: db-data
+        persistentVolumeClaim:
+          claimName: torino
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dbservice
+spec:
+  selector:
+    app: db
+  ports:
+  - port: 3306

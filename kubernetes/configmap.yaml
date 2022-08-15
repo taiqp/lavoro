@@ -1,0 +1,10 @@
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: roma
+data:
+  database: accounts
+  db_user: admin
+  rmq_user: test
