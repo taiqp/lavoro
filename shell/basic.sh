@@ -1,6 +1,7 @@
 #!/bin/bash
 sudo apt update
 sudo apt install lsscsi net-tools wget git unzip apache2 -y
+wget https://raw.githubusercontent.com/taiqp/lavoro-forwork/main/shell/alias.txt
 sudo snap install docker
 sudo snap install yq
 sudo apt install mysql-client -y
