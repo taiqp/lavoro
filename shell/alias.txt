@@ -1,0 +1,4 @@
+alias kube=kubectl
+alias kubes="kubectl -n kube-system"
+alias kubeE="kubectl get deploy,sts,daemonset"
+alias kubeV="kubectl get sc,pv,pvc"
