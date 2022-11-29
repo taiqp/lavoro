@@ -1,11 +1,12 @@
 #!/bin/bash
 sudo apt update
-sudo apt install lsscsi net-tools wget git unzip apache2 -y
+sudo apt install lsscsi net-tools wget git unzip apache2 traceroute -y
 wget https://raw.githubusercontent.com/taiqp/lavoro-forwork/main/shell/alias.txt
 sudo snap install docker
 sudo snap install yq
 sudo apt install mysql-client -y
 sudo apt install postgresql-client -y
+sudo apt install redis-tools -y
 sudo apt install awscli -y
 sudo apt install ansible -y
 sudo snap install terraform --classic
@@ -19,4 +20,3 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 chmod 700 get_helm.sh
 ./get_helm.sh
-sudo apt install redis-tools -y
